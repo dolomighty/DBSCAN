@@ -2,28 +2,37 @@
 #ifndef _XY_h_
 #define _XY_h_
 
+#undef NDEBUG
+#include <assert.h>
+
 struct XY {
-    float x;
-    float y;
+    double x;
+    double y;
 
     XY(){
         XY(0,0);
     }
 
-    XY( float _x, float _y ){
+    XY( double _x, double _y ){
         x = _x;
         y = _y;
     }
 
-    float dot( const XY& other ) const {
+    double dot( const XY& other ) const {
         return x*other.x + y*other.y;
     }
 
-    float operator * ( const XY& rhs ) const {
+    double operator [] ( int idx ) const {
+        if(idx==0) return x;
+        if(idx==1) return y;
+        assert("idx invalido"==0);
+    }
+
+    double operator * ( const XY& rhs ) const {
         return dot(rhs);
     }
 
-    XY operator * ( float rhs ){
+    XY operator * ( double rhs ){
         return XY( x*rhs, y*rhs );
     }
 
@@ -35,7 +44,7 @@ struct XY {
         return XY( x+rhs.x, y+rhs.y );
     }
 
-    XY operator / ( float rhs ){
+    XY operator / ( double rhs ){
         return XY(x/rhs,y/rhs);
     }
 };

@@ -2,7 +2,7 @@
 
 
 rebuild(){
-    date +"%F %T rebuild $TARGET"
+    date +"%F %T rebuild $TARGET" > /dev/stderr
     mkdir -p `dirname "$TARGET"`
     eval "$ONELINER" > "$TARGET"
 }
